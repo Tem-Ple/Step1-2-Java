@@ -46,6 +46,7 @@ public class StopThreadUnsafe {
                     }
                     u.setName(String.valueOf(v));
                 }
+
                 Thread.yield();
             }
         }
