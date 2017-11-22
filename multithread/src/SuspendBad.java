@@ -12,9 +12,9 @@ public class SuspendBad {
         @Override
         public void run() {
             synchronized (o){
-                System.out.println("in "+this.getName());
-                Thread.currentThread().suspend();
                 System.out.println("suspend "+this.getName());
+                Thread.currentThread().suspend();
+                System.out.println("end "+this.getName());
             }
         }
     }
@@ -22,13 +22,17 @@ public class SuspendBad {
     public static void main(String[] args) throws InterruptedException {
         t1.start();
         t2.start();
+
         Thread.sleep(1000);
         System.out.println("resume t1");
         t1.resume();
+
+        //Thread.sleep(1000);   //notice the sleep and not sleep
         System.out.println("resume t2");
         t2.resume();
         t1.join();
         t2.join();
+
 //        use jstack+PID to analyze the Thread t2
 
 //        "t2" #11 prio=5 os_prio=0 tid=0x00007fdb2c208000 nid=0x7f1b runnable [0x00007fdb18e4d000]
